@@ -22,6 +22,4 @@ for l in lines:
 
     grand_sum = grand_sum + int(concatenated_digit)
 
-    print(f"For the line, {line}, the sum was found to be {int(concatenated_digit)}, leading to a new grand sum of {grand_sum}.")
-
 print(f"The grand sum is {grand_sum}")

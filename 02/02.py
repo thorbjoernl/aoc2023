@@ -32,8 +32,6 @@ for l in lines:
 
     games.append(game)
 
-print(games)
-
 # Solving part 1
 grand_sum = 0
 
