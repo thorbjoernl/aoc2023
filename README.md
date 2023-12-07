@@ -12,3 +12,5 @@ Measured using `perf stat -r25 python *.py`
 | 02  | 23.58 ms         |                                                           |
 | 03  | 29.93 ms         | Part 1 only.                                              |
 | 04  | 23.72 ms         |                                                           |
+| 05  | 17.52 ms         | Part 1 only.                                              |
+| 06  | 17.64 ms         |                                                           |
