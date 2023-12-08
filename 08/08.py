@@ -1,3 +1,5 @@
+import math
+
 
 def load_configuration(file_path):
     with open(file_path, "r") as f:
@@ -5,6 +7,7 @@ def load_configuration(file_path):
 
         instruction_string = lines[0]
 
+        starting_nodes = []
         mapping = {}
         for l in lines[2:]:
             split = l.split("=")
@@ -18,9 +21,12 @@ def load_configuration(file_path):
 
             mapping[position] = (left, right)
 
-        return instruction_string, mapping
+            if position[2] == "A":
+                starting_nodes.append(position)
 
-instruction, mapping = load_configuration("input.txt")
+        return instruction_string, mapping, starting_nodes
+
+instruction, mapping, starting_nodes = load_configuration("input.txt")
 
 position = "AAA"
 index = 0
@@ -40,3 +46,21 @@ while position != "ZZZ":
     
 print(f"Solution - Part 1: {index}")
 
+# Part 2
+solution_lengths = []
+for position in starting_nodes:
+    index = 0
+
+    while position[2] != "Z":
+        if get_instruction(instruction, index) == "L":
+            position = mapping[position][0]
+        elif get_instruction(instruction, index) == "R":
+            position = mapping[position][1]
+        else:
+            assert False
+
+        index = index +1
+
+    solution_lengths.append(index)
+
+print(f"Solution - Part 2: {math.lcm(*solution_lengths)}")
