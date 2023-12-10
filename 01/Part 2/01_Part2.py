@@ -21,14 +21,14 @@ lookup_table = {
 for i in range(0, 10):
     lookup_table[str(i)] = str(i)
 
-grand_sum = 0
+_sum = 0
 
 for l in lines:
     matches = re.findall(pattern, l)
     digit1 = lookup_table[matches[0]]
     digit2 = lookup_table[matches[-1]]
 
-    grand_sum = grand_sum + int(digit1 + digit2)
-    print(f"For line, {l}, the calibration value {digit1 + digit2} was found.\nThe new grand sum is {grand_sum}.")
+    _sum = _sum + int(digit1 + digit2)
+    print(f"For line, {l}, the calibration value {digit1 + digit2} was found.\nThe new grand sum is {_sum}.")
 
     

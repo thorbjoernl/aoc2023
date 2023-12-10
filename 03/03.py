@@ -33,21 +33,12 @@ for i, l in enumerate(lines):
             for b in range(y-1, y+2):
                 if a >= 0 and a < width:
                     if b>= 0 and b < height:
-                        #print("Coord: ", a, b)
                         neighbours.append(lines[b][a])
 
         # Loop through neighbouring "tiles" and check if it is a symbol.
-        has_symbol_neighbour = False
-        for c in neighbours:
-            if c in SYMBOLS:
-                has_symbol_neighbour = True
-                break
-        
-        # Append to list if symbol in neighbour "tile".
-        if has_symbol_neighbour:
+        if any([(c in SYMBOLS) for c in neighbours]):
             numbers.append(int(string))
 
-print(numbers)
-print(sum(numbers))
+print(f"Part 1 Solution: {sum(numbers)}")
 
 # Solve Part 2.

@@ -41,9 +41,6 @@ def compare_cards(c1, c2):
 
     return 0
 
-
-
-
 def parse_configuration(file_name: str):
     with open(file_name, "r") as f:
         lines = f.readlines()

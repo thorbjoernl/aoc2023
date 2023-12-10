@@ -23,17 +23,9 @@ def predict_next_value(s):
     while True:
         seq.append(produce_next_sequence(seq[-1]))
 
-        is_only_zeros = True
-        for n in seq[-1]:
-            if n != 0:
-                is_only_zeros = False
-                break
-        
-        if is_only_zeros:
+        if all([(x == 0) for x in seq[-1]]):
             break
-    
-    print(seq)
-
+ 
     for i in reversed(range(0, len(seq)-1)):
         seq[i].append(seq[i][-1] + seq[i+1][-1])
 

@@ -11,17 +11,16 @@ def quadratic_equation(a, b, c):
     x2 = (-b - math.sqrt(b**2-(4*a*c)))/(2*a)
     return x1, x2
 
-product = 1
+factors = []
 for duration, distance in zip(times, record_distances):
     a = -1
     b = duration
     c = -distance
     bound1, bound2 = quadratic_equation(a, b, c)
 
-    print(bound1, bound2)
-    product = product*abs(int(bound1)-int(bound2))
+    factors.append(abs(int(bound1)-int(bound2)))
 
-print(f"Part 1 solution: {product}")
+print(f"Part 1 solution: {math.prod(factors)}")
 
 # Part 2
 time = int("".join([str(x) for x in times]))

@@ -3,9 +3,8 @@ from collections import defaultdict
 with open("input.txt", "r") as f:
     lines = f.readlines()
 
-
 # Part 1
-grand_sum = 0
+_sum = 0
 for l in lines:
     substrings = l.split(":")[1].split("|")
 
@@ -18,9 +17,9 @@ for l in lines:
         if n in winning_numbers:
             count = count +1
 
-    grand_sum = grand_sum + int(2**(count-1))
+    _sum = _sum + int(2**(count-1))
 
-print(grand_sum)
+print(f"Part 1 Solution: {_sum}")
 
 # Part 2
 cards = []
@@ -57,4 +56,4 @@ for c in cards:
         data[c["id"] + j] = data[c["id"] + j] + data[c["id"]]
         #cards.append(cards[cards[i]["id"] + j])
 
-print(sum(data.values()))
+print(f"Part 2 Solution: {sum(data.values())}")

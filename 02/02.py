@@ -33,7 +33,7 @@ for l in lines:
     games.append(game)
 
 # Solving part 1
-grand_sum = 0
+_sum = 0
 
 for g in games:
     allowed = True
@@ -49,17 +49,18 @@ for g in games:
             break
     
     if allowed:
-        grand_sum = grand_sum + g["id"]
+        _sum = _sum + g["id"]
 
-print(f"Part 1 - Solution: {grand_sum}")
+print(f"Part 1 - Solution: {_sum}")
 
-grand_sum = 0
+_sum = 0
+
 # Solving part 2
 for g in games:
     min_red = max([x["red"] for x in g["draws"]])
     min_blue = max([x["blue"] for x in g["draws"]])
     min_green = max([x["green"] for x in g["draws"]])
 
-    grand_sum = grand_sum + (min_red * min_blue * min_green)
+    _sum = _sum + (min_red * min_blue * min_green)
 
-print(f"Part 2 - Solution: {grand_sum}")
+print(f"Part 2 - Solution: {_sum}")

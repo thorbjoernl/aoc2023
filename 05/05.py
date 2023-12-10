@@ -87,7 +87,6 @@ while i*2+1 < len(seeds):
 
     buckets.append([bucket_start, bucket_length])
 
-
     i = i+1
 
 print(buckets)
