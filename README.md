@@ -6,15 +6,17 @@ My solutions for [Advent of Code 2023](https://adventofcode.com/2023)
 
 Measured using `perf stat -r25 python *.py`
 
-| Day | Average run time | Note                                                      |
-| --- | ---------------- | --------------------------------------------------------- |
-| 01  | 54.38 ms         | Part 1 and Part 2 measured separately and added together. |
-| 02  | 23.58 ms         |                                                           |
-| 03  | 29.93 ms         | Part 1 only.                                              |
-| 04  | 23.72 ms         |                                                           |
-| 05  | 17.52 ms         | Part 1 only.                                              |
-| 06  | 17.64 ms         |                                                           |
-| 07  |                  |                                                           |
-| 08  | 68.96 ms         |                                                           |
-| 09  | 26.44 ms         |                                                           |
-| 10  |                  |                                                           |
+| Day | Average run time | Stars | Note                                                      |
+| --- | ---------------- | ----- | --------------------------------------------------------- |
+| 01  | 54.38 ms         | **    | Part 1 and Part 2 measured separately and added together. |
+| 02  | 23.58 ms         | **    |                                                           |
+| 03  | 29.93 ms         | *     | Part 1 only.                                              |
+| 04  | 23.72 ms         | **    |                                                           |
+| 05  | 17.52 ms         | *     | Part 1 only.                                              |
+| 06  | 17.64 ms         | **    |                                                           |
+| 07  | 35.25 ms         | *     | Part 1 only.                                              |
+| 08  | 68.96 ms         | **    |                                                           |
+| 09  | 26.44 ms         | **    |                                                           |
+| 10  |                  |       |                                                           |
+| 11  |                  |       |                                                           |
+| 12  | 875.76 ms        | **    |                                                           |

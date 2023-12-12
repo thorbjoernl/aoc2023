@@ -1,97 +1,59 @@
 from functools import cache
-def load_configuration(file_path):
+
+def load_input(file_path):
     with open(file_path, "r") as f:
-        lines = [l.strip() for l in f.readlines()]
+        dat = [l.split(" ") for l in [m.strip() for m in f.readlines()]]
 
-        lines2 = [l.split(" ") for l in lines]
+        return list(map(lambda d : (d[0], tuple(int(j) for j in d[1].split(","))), dat))
 
-        lines3 = []
-        for l in lines2:
-            lines3.append((l[0], tuple(int(j) for j in l[1].split(","))))
+data = load_input("input.txt")
 
-        return lines3
+@cache
+def n_arrangements(s, groups_left, size):
+    """
+    Counts the number of possible arrangements of a substring.
+    s is the substring in question.
+    groups_left is a tuple of the sizes of groups remaining.
+    size is an integer indicating the size of the current spring
+    group being considered.
+    """
+    if len(s) == 0:
+        if len(groups_left) == 0 and size == 0:
+            # Found solution is valid, count it.
+            return 1
+        elif len(groups_left) == 1 and size == groups_left[0]:
+            # Found solution is valid, count it.
+            return 1
+        else:
+            # Found combination is invalid.
+            return 0
 
-def check_constraints(puzzle, constraint):
-    partial_check = False
-    counts = []
-    current_count = 0
-    for _, c in enumerate(puzzle):
-        if c == "?":
-            partial_check = True
-            break
-        elif c == "#":
-            current_count = current_count +1
-        elif c == ".":
-            if current_count > 0:
-                counts.append(current_count)
-                current_count = 0
+    if len(groups_left) > 0 and size > groups_left[0]:
+        # A group in the middle was found that is to large given the remainig groups.
+        return 0
+    elif len(groups_left) == 0 and size > 0:
+        # An additional group was found that is not compatible with the set of group sizes.
+        return 0
+
+    n = 0
+    spring = s[0]
+
+    if spring == "#" or spring == "?":
+        n += n_arrangements(s[1:], groups_left, size +1)
+
+    if spring == "." or spring == "?":
+        if len(groups_left) > 0 and size == groups_left[0]:
+            n+= n_arrangements(s[1:], groups_left[1:], 0)
+        elif size == 0:
+            n+= n_arrangements(s[1:], groups_left, 0)
+
+    return n
+
+def part_1():
+    return sum(map(lambda d : n_arrangements(d[0], d[1], 0), data))
     
-    if not partial_check and current_count > 0:
-        counts.append(current_count)
+def part_2():
+    return sum(map(lambda d : n_arrangements(d[0] + 4*("?" + d[0]), 5*d[1], 0), data))
 
-    if partial_check:
-        return all([count1 == count2 for count1, count2 in zip(counts, constraint[:len(counts)])])
-    else:
-        return (len(counts) == len(constraint)) and all([count1 == count2 for count1, count2 in zip(counts, constraint)])
-
-
-def recursive_solver(puzzle, constraint):
-    result = []
-
-    # Find position of first "?"
-    i = 0
-    while i < len(puzzle):
-        if puzzle[i] == "?":
-            break
-        i=i+1 
-    
-    if i >= len(puzzle):
-        # No more question marks, return answer.
-        if check_constraints(puzzle, constraint):
-            #print(f"Puzzle {puzzle} succeeded constraint check, {constraint}")
-            result.append(puzzle)
-        #else:
-            #print(f"Puzzle {puzzle} failed constraint check, {constraint}")
-    else:
-        new_puzzle = puzzle[:i] + "#" + puzzle[i + 1:]
-        if check_constraints(new_puzzle, constraint):
-            result.extend(recursive_solver(new_puzzle, constraint))
-
-        new_puzzle = puzzle[:i] + "." + puzzle[i + 1:]
-        if check_constraints(new_puzzle, constraint):
-            result.extend(recursive_solver(new_puzzle, constraint))
-
-    return result
-            
-
-data = load_configuration("input.txt")
-#print(data)
-
-# Part 1
-_sum = 0
-for d in data:
-    print(f"{d}")
-    _sum = _sum + len(recursive_solver(d[0], d[1]))
-
-print(f"Solution Part 1: {_sum}")
-# Solution: 8075
-# 27,601.80 msec
-
-#for d in data:
-#    print(f"{d}")
-#    _sum = _sum + len(recursive_solver(d[0], d[1]))**5
-#
-#print(f"Solution Part 2: {_sum}")
-
-#_sum = 0
-#for d in data:
-#    print(d)
-#    puzzle = d[0]
-#    for _ in range(4):
-#        puzzle = puzzle + "?" + d[0]
-
-#    constraint = 5*d[1]
-
-#    _sum = _sum + len(recursive_solver(puzzle, constraint))
-
-#print(f"Solution Part 2: {_sum}")
+print(f"Part 1: {part_1()}") # 8075
+print(f"Part 2: {part_2()}") # 4232520187524
